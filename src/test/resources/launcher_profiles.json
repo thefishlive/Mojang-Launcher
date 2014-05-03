@@ -1,0 +1,42 @@
+{
+  "profiles": {
+    "McBadgerPack-1.7.2-b": {
+      "name": "McBadgerPack-1.7.2-b",
+      "gameDir": "C:\\Users\\James\\AppData\\Roaming\\.mcbadgerpack-1.7.2-b",
+      "lastVersionId": "McBadgerPack-1.7.2-b",
+      "javaArgs": "-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\u003dtrue -Dfml.ignorePatchDiscrepancies\u003dtrue",
+      "allowedReleaseTypes": [],
+      "playerUUID": "75b7fafe7e2443539e0e63fd26caab03",
+      "launcherVisibilityOnGameClose": "keep the launcher open"
+    },
+    "Dev": {
+      "name": "Dev",
+      "gameDir": "C:\\Users\\James\\AppData\\Roaming\\.mcbadgerpack-1.7.2-b",
+      "lastVersionId": "14w17a",
+      "javaArgs": "-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\u003dtrue -Dfml.ignorePatchDiscrepancies\u003dtrue",
+      "allowedReleaseTypes": [
+        "snapshot",
+        "release"
+      ],
+      "playerUUID": "75b7fafe7e2443539e0e63fd26caab03",
+      "launcherVisibilityOnGameClose": "keep the launcher open"
+    }
+  },
+  "selectedProfile": "Dev",
+  "clientToken": "24bde6dd-cefc-4cff-8c97-44c46e808fc2",
+  "authenticationDatabase": {
+    "75b7fafe7e2443539e0e63fd26caab03": {
+      "displayName": "DisplayName",
+      "userProperties": [
+        {
+          "name": "twitch_access_token",
+          "value": "1fc2942a11f5f37414de5192d30c5a14"
+        }
+      ],
+      "accessToken": "abbaaa7cd925256f667b15d9d1c6745d",
+      "userid": "8ad76b690b964550908ad6ac1710808a",
+      "uuid": "75b7fafe-7e24-4353-9e0e-63fd26caab03",
+      "username": "username@example.com"
+    }
+  }
+}
