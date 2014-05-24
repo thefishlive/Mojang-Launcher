@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.thefishlive</groupId>
 	<artifactId>mojang-launcher</artifactId>
-	<version>1.1.0</version>
+	<version>1.2.0-SNAPSHOT</version>
 	<name>MojangLauncher</name>
 	<description>A simple library for interfacing with the mojang minecraft launcher and its backend data files.</description>
 	
