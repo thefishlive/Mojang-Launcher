@@ -8,8 +8,8 @@ public class LauncherDataException extends RuntimeException {
 		super(message);
 	}
 
-	public LauncherDataException(Throwable caause) {
-		super(caause);
+	public LauncherDataException(Throwable cause) {
+		super(cause);
 	}
 
 	public LauncherDataException(String message, Throwable cause) {

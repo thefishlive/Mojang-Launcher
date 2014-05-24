@@ -140,9 +140,10 @@ public class JavaArgs {
 	}
 	
 	/**
-	 * Adds a system property to the command, equavilent of {@code -Dproperty=value}.
+	 * Adds a system property to the command, equivalent of {@code -Dproperty=value}.
 	 * 
-	 * @param memory the memory to use
+	 * @param property the system property
+     * @param value the new value of this property
 	 * @return the current instance
 	 */
 	public JavaArgs addSysProperty(String property, String value) {

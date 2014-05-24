@@ -1,5 +1,6 @@
 package io.github.thefishlive.minecraft.profiles;
 
+import io.github.thefishlive.minecraft.ReleaseType;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,8 +45,8 @@ public class ProfilesFileTest {
         profile.setGameDir(new File("C:\\Users\\James\\AppData\\Roaming\\.mcbadgerpack-1.7.2-b"));
         profile.setLastVersionId("14w17a");
         profile.setJavaArgs(new JavaArgs().setMaxMemory("1G").addSysProperty("fml.ignoreInvalidMinecraftCertificates", "true").addSysProperty("fml.ignorePatchDiscrepancies", "true"));
-        profile.addReleaseType(GameProfile.ReleaseType.SNAPSHOT);
-        profile.addReleaseType(GameProfile.ReleaseType.RELEASE);
+        profile.addReleaseType(ReleaseType.SNAPSHOT);
+        profile.addReleaseType(ReleaseType.RELEASE);
         profile.setPlayerUUID(auth.getUuid());
         profile.setLauncherVisibility(VisibilityRule.KEEP_LAUNCHER);
         expected.addProfile(profile);
@@ -62,7 +63,6 @@ public class ProfilesFileTest {
         System.out.println(profile.toString());
         System.out.println(expected.toString());
 
-        profile.write();
         assertEquals(profile, expected);
     }
 

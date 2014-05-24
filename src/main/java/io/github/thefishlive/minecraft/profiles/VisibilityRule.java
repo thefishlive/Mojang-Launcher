@@ -5,7 +5,7 @@ import java.util.Map;
 
 public enum VisibilityRule {
 	KEEP_LAUNCHER("keep the launcher open"),
-	HIDE_LAUCNHER("hide launcher and re-open when game closes"),
+	HIDE_LAUNCHER("hide launcher and re-open when game closes"),
 	CLOSE_LAUNCHER("close launcher when game starts");
 	
 	private static final Map<String, VisibilityRule> RULES = new HashMap<>();

@@ -1,4 +1,4 @@
-package io.github.thefishlive.minecraft.profiles.json;
+package io.github.thefishlive.minecraft.json;
 
 import java.io.File;
 import java.lang.reflect.Type;

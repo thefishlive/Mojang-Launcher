@@ -8,8 +8,8 @@ public class InvalidProfileFileFormatException extends LauncherDataException {
 		super(message);
 	}
 	
-	public InvalidProfileFileFormatException(Throwable caause) {
-		super(caause);
+	public InvalidProfileFileFormatException(Throwable cause) {
+		super(cause);
 	}
 
 }

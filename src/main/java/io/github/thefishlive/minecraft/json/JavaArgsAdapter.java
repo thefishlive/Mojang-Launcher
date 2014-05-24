@@ -1,4 +1,4 @@
-package io.github.thefishlive.minecraft.profiles.json;
+package io.github.thefishlive.minecraft.json;
 
 import io.github.thefishlive.minecraft.profiles.JavaArgs;
 

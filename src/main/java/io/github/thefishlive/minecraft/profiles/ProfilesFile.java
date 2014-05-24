@@ -3,18 +3,15 @@ package io.github.thefishlive.minecraft.profiles;
 import io.github.thefishlive.minecraft.profiles.exception.InvalidProfileFileFormatException;
 import io.github.thefishlive.minecraft.profiles.exception.LauncherDataException;
 import io.github.thefishlive.minecraft.profiles.exception.ProfileFileNotFoundException;
-import io.github.thefishlive.minecraft.profiles.json.FileAdapter;
-import io.github.thefishlive.minecraft.profiles.json.JavaArgsAdapter;
-import io.github.thefishlive.minecraft.profiles.json.ReleaseTypeAdapter;
-import io.github.thefishlive.minecraft.profiles.json.UUIDAdapter;
-import io.github.thefishlive.minecraft.profiles.json.VisibilityRuleAdapter;
 import io.github.thefishlive.minecraft.profiles.utils.Utils;
+import io.github.thefishlive.minecraft.json.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -49,9 +46,9 @@ public class ProfilesFile {
 							.setPrettyPrinting()
 							.registerTypeAdapter(UUID.class, new UUIDAdapter())
 							.registerTypeAdapter(File.class, new FileAdapter())
-							.registerTypeAdapter(VisibilityRule.class, new VisibilityRuleAdapter())
-							.registerTypeAdapter(GameProfile.ReleaseType.class, new ReleaseTypeAdapter())
 							.registerTypeAdapter(JavaArgs.class, new JavaArgsAdapter())
+                            .registerTypeAdapter(Date.class, new DateAdapter())
+                            .registerTypeAdapterFactory(new EnumTypeAdapterFactory())
 							.create();
 	
 	private static File launcherProfiles = new File(Utils.getMinecraftDirectory(), "launcher_profiles.json");

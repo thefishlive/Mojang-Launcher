@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.*;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.thefishlive.minecraft.ReleaseType;
 import lombok.NonNull;
 
 /**
@@ -26,84 +27,8 @@ public class GameProfile {
 	private File gameDir;
 	private File javaDir;
 	@SerializedName("useHopperCrashService") private boolean useHopper;
-	
-	@Override
-	public int hashCode() {
-		int prime = 5;
-		int hash = 1;
-		hash += prime * name.hashCode();
-		if (lastVersionId != null) hash += prime * lastVersionId.hashCode();
-		if (allowedReleases != null) hash += prime * allowedReleases.hashCode();
-		if (playerUUID != null) hash += prime * playerUUID.hashCode();
-		if (launcherVisibility != null) hash += prime * launcherVisibility.hashCode();
-		if (javaArgs != null) hash += prime * javaArgs.hashCode();
-		if (resolution != null) hash += prime * resolution.hashCode();
-		if (gameDir != null) hash += prime * gameDir.hashCode();
-		if (javaDir != null) hash += prime * javaDir.hashCode();
-		hash += prime * (useHopper ? 1 : 2);
-		return hash;
-	}
-	
-	public boolean equals(Object obj) {
-		if (!(obj instanceof GameProfile)) return false;
-		return hashCode() == obj.hashCode();
-	}
-	
-	public static class Resolution {
-		private final int width;
-		private final int height;
-		
-		@Override
-		public java.lang.String toString() {
-			return "GameProfile.Resolution(width=" + this.getWidth() + ", height=" + this.getHeight() + ")";
-		}
-		
-		@Override
-		public int hashCode() {
-			return 31 * width + height;
-		}
-		
-		public Resolution(final int width, final int height) {
-			this.width = width;
-			this.height = height;
-		}
-		
-		public int getWidth() {
-			return this.width;
-		}
-		
-		public int getHeight() {
-			return this.height;
-		}
-	}
-	
-	public static enum ReleaseType {
-		SNAPSHOT("snapshot"),
-		RELEASE("release"),
-		BETA("old_beta"),
-		ALPHA("old_alpha");
-		private static final Map<String, ReleaseType> TYPES = new HashMap<>();
-		private final String id;
-		static {
-			for (ReleaseType type : values()) {
-				TYPES.put(type.getId(), type);
-			}
-		}
-		
-		public static ReleaseType fromId(String id) {
-			return TYPES.get(id);
-		}
-		
-		private ReleaseType(final String id) {
-			this.id = id;
-		}
-		
-		public String getId() {
-			return this.id;
-		}
-	}
-	
-	public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user, 
+
+    public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user,
 						VisibilityRule visibility, String javaArgs, Resolution resolution, File gameDir, File javaDir) {
 		this(name, lastVersion, allowedReleases, user, visibility, new JavaArgs(javaArgs), resolution, gameDir, javaDir);
 		if (name == null) {
@@ -111,7 +36,7 @@ public class GameProfile {
 		}
 	}
 	
-	public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user, 
+	public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user,
 						VisibilityRule visibility, JavaArgs javaArgs, Resolution resolution, File gameDir, File javaDir) {
 		if (name == null) {
 			throw new NullPointerException("name");
@@ -158,7 +83,7 @@ public class GameProfile {
 	public void addReleaseType(ReleaseType type) {
 		this.allowedReleases.add(type);
 	}
-	
+
 	public UUID getPlayerUUID() {
 		return this.playerUUID;
 	}
@@ -210,9 +135,62 @@ public class GameProfile {
 	public void setJavaDir(final File javaDir) {
 		this.javaDir = javaDir;
 	}
-	
-	@Override
+
+    @Override
+    public int hashCode() {
+        int prime = 5;
+        int hash = 1;
+        hash += prime * name.hashCode();
+        if (lastVersionId != null) hash += prime * lastVersionId.hashCode();
+        if (allowedReleases != null) hash += prime * allowedReleases.hashCode();
+        if (playerUUID != null) hash += prime * playerUUID.hashCode();
+        if (launcherVisibility != null) hash += prime * launcherVisibility.hashCode();
+        if (javaArgs != null) hash += prime * javaArgs.hashCode();
+        if (resolution != null) hash += prime * resolution.hashCode();
+        if (gameDir != null) hash += prime * gameDir.hashCode();
+        if (javaDir != null) hash += prime * javaDir.hashCode();
+        hash += prime * (useHopper ? 1 : 2);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof GameProfile)) return false;
+        return hashCode() == obj.hashCode();
+    }
+
+    @Override
 	public java.lang.String toString() {
 		return "GameProfile(name=" + this.getName() + ", lastVersionId=" + this.getLastVersionId() + ", allowedReleases=" + this.allowedReleases + ", playerUUID=" + this.getPlayerUUID() + ", launcherVisibility=" + this.getLauncherVisibility() + ", javaArgs=" + this.getJavaArgs() + ", resolution=" + this.getResolution() + ", gameDir=" + this.getGameDir() + ", javaDir=" + this.getJavaDir() + ", useHopper=" + this.useHopper + ")";
 	}
+
+    public static class Resolution {
+        private final int width;
+        private final int height;
+
+        public Resolution(final int width, final int height) {
+            this.width = width;
+            this.height = height;
+        }
+
+        public int getWidth() {
+            return this.width;
+        }
+
+        public int getHeight() {
+            return this.height;
+        }
+
+        @Override
+        public java.lang.String toString() {
+            return "GameProfile.Resolution(width=" + this.getWidth() + ", height=" + this.getHeight() + ")";
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * width + height;
+        }
+
+    }
+
 }
