@@ -34,7 +34,6 @@ import com.google.gson.JsonParseException;
  * <p />
  * Please note that changes made in this library will only come into effect
  * on launcher restart.
-
  * <p />
  *
  * @author James
@@ -54,7 +53,7 @@ public class ProfilesFile {
 	private static File launcherProfiles = new File(Utils.getMinecraftDirectory(), "launcher_profiles.json");
 	
 	private Map<String, GameProfile> profiles = new HashMap<>();
-	private Map<UUID, AuthProfile> authenticationDatabase = new HashMap<>();
+	private Map<String, AuthProfile> authenticationDatabase = new HashMap<>();
 	private String selectedProfile;
 	private String clientToken;
 	
@@ -79,7 +78,7 @@ public class ProfilesFile {
 	 * @see AuthProfile
 	 */
 	public void addProfile(AuthProfile profile) throws LauncherDataException {
-		authenticationDatabase.put(profile.getUuid(), profile);
+		authenticationDatabase.put(profile.getUuid().toString().replace("-", ""), profile);
 	}
 
     /**
@@ -174,7 +173,7 @@ public class ProfilesFile {
 	 * 
 	 * @return a map of the uuid to {@link AuthProfile}
 	 */
-	public Map<UUID, AuthProfile> getAuthenticationDatabase() {
+	public Map<String, AuthProfile> getAuthenticationDatabase() {
 		return this.authenticationDatabase;
 	}
 	
@@ -199,9 +198,9 @@ public class ProfilesFile {
 	/**
 	 * Gets the yggdrasil client token for this launcher instance.
 	 * <p />
-	 * This is sent with all authentication requeststs to the mojang servers
+	 * This is sent with all authentication requests to the mojang servers
 	 * to identify this computer. As such if changed all current access keys
-	 * will become invalid. As well 
+	 * will become invalid.
 	 *  
 	 * @return
 	 */
