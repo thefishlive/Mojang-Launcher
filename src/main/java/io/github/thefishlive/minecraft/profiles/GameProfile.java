@@ -154,9 +154,24 @@ public class GameProfile {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof GameProfile)) return false;
-        return hashCode() == obj.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GameProfile that = (GameProfile) o;
+
+        if (useHopper != that.useHopper) return false;
+        if (allowedReleases != null ? !allowedReleases.equals(that.allowedReleases) : that.allowedReleases != null) return false;
+        if (gameDir != null ? !gameDir.equals(that.gameDir) : that.gameDir != null) return false;
+        if (javaArgs != null ? !javaArgs.equals(that.javaArgs) : that.javaArgs != null) return false;
+        if (javaDir != null ? !javaDir.equals(that.javaDir) : that.javaDir != null) return false;
+        if (lastVersionId != null ? !lastVersionId.equals(that.lastVersionId) : that.lastVersionId != null) return false;
+        if (launcherVisibility != that.launcherVisibility) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (playerUUID != null ? !playerUUID.equals(that.playerUUID) : that.playerUUID != null) return false;
+        if (resolution != null ? !resolution.equals(that.resolution) : that.resolution != null) return false;
+
+        return true;
     }
 
     @Override

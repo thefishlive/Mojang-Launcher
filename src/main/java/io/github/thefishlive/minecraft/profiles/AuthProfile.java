@@ -96,13 +96,32 @@ public class AuthProfile {
 	public void setDisplayName(String name) {
 		this.displayName = name;
 	}
-	
-	public boolean equals(Object obj) {
-		if (!(obj instanceof AuthProfile)) return false;
-		AuthProfile other = (AuthProfile) obj;
-		
-		return displayName.equals(other.displayName) && userid.equals(other.userid) &&
-				accessToken.equals(other.accessToken) && userProperties.equals(other.userProperties)&&
-				username.equals(other.username) && uuid.equals(other.uuid);
-	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AuthProfile that = (AuthProfile) o;
+
+        if (accessToken != null ? !accessToken.equals(that.accessToken) : that.accessToken != null) return false;
+        if (displayName != null ? !displayName.equals(that.displayName) : that.displayName != null) return false;
+        if (userProperties != null ? !userProperties.equals(that.userProperties) : that.userProperties != null) return false;
+        if (userid != null ? !userid.equals(that.userid) : that.userid != null) return false;
+        if (username != null ? !username.equals(that.username) : that.username != null) return false;
+        if (uuid != null ? !uuid.equals(that.uuid) : that.uuid != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = displayName != null ? displayName.hashCode() : 0;
+        result = 31 * result + (userProperties != null ? userProperties.hashCode() : 0);
+        result = 31 * result + (accessToken != null ? accessToken.hashCode() : 0);
+        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        return result;
+    }
 }
