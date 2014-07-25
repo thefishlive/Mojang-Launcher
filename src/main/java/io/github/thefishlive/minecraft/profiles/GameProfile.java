@@ -10,8 +10,7 @@ import lombok.NonNull;
 /**
  * Game profiles are profiles used to set the settings that minecraft runs
  * with, eg. the game version, default resolution and the launcher's
- * visibility rule, along with what authentication profile is used to identify
- * the user.
+ * visibility rule.
  *
  * @author James
  * @version 1.0.0
@@ -20,7 +19,6 @@ public class GameProfile {
 	@NonNull private final String name;
 	private String lastVersionId;
 	@SerializedName("allowedReleaseTypes") private List<ReleaseType> allowedReleases = new ArrayList<>();
-	private UUID playerUUID;
 	@SerializedName("launcherVisibilityOnGameClose") private VisibilityRule launcherVisibility;
 	private JavaArgs javaArgs;
 	private Resolution resolution;
@@ -28,15 +26,15 @@ public class GameProfile {
 	private File javaDir;
 	@SerializedName("useHopperCrashService") private boolean useHopper;
 
-    public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user,
+    public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases,
 						VisibilityRule visibility, String javaArgs, Resolution resolution, File gameDir, File javaDir) {
-		this(name, lastVersion, allowedReleases, user, visibility, new JavaArgs(javaArgs), resolution, gameDir, javaDir);
+		this(name, lastVersion, allowedReleases, visibility, new JavaArgs(javaArgs), resolution, gameDir, javaDir);
 		if (name == null) {
 			throw new NullPointerException("name");
 		}
 	}
 	
-	public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases, UUID user,
+	public GameProfile(@NonNull String name, String lastVersion, List<ReleaseType> allowedReleases,
 						VisibilityRule visibility, JavaArgs javaArgs, Resolution resolution, File gameDir, File javaDir) {
 		if (name == null) {
 			throw new NullPointerException("name");
@@ -44,7 +42,6 @@ public class GameProfile {
 		this.name = name;
 		this.lastVersionId = lastVersion;
 		this.allowedReleases = allowedReleases;
-		this.playerUUID = user;
 		this.launcherVisibility = visibility;
 		this.javaArgs = javaArgs;
 		this.resolution = resolution;
@@ -84,14 +81,6 @@ public class GameProfile {
 		this.allowedReleases.add(type);
 	}
 
-	public UUID getPlayerUUID() {
-		return this.playerUUID;
-	}
-	
-	public void setPlayerUUID(final UUID playerUUID) {
-		this.playerUUID = playerUUID;
-	}
-	
 	public VisibilityRule getLauncherVisibility() {
 		return this.launcherVisibility;
 	}
@@ -143,7 +132,6 @@ public class GameProfile {
         hash += prime * name.hashCode();
         if (lastVersionId != null) hash += prime * lastVersionId.hashCode();
         if (allowedReleases != null) hash += prime * allowedReleases.hashCode();
-        if (playerUUID != null) hash += prime * playerUUID.hashCode();
         if (launcherVisibility != null) hash += prime * launcherVisibility.hashCode();
         if (javaArgs != null) hash += prime * javaArgs.hashCode();
         if (resolution != null) hash += prime * resolution.hashCode();
@@ -168,7 +156,6 @@ public class GameProfile {
         if (lastVersionId != null ? !lastVersionId.equals(that.lastVersionId) : that.lastVersionId != null) return false;
         if (launcherVisibility != that.launcherVisibility) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (playerUUID != null ? !playerUUID.equals(that.playerUUID) : that.playerUUID != null) return false;
         if (resolution != null ? !resolution.equals(that.resolution) : that.resolution != null) return false;
 
         return true;
@@ -176,7 +163,7 @@ public class GameProfile {
 
     @Override
 	public java.lang.String toString() {
-		return "GameProfile(name=" + this.getName() + ", lastVersionId=" + this.getLastVersionId() + ", allowedReleases=" + this.allowedReleases + ", playerUUID=" + this.getPlayerUUID() + ", launcherVisibility=" + this.getLauncherVisibility() + ", javaArgs=" + this.getJavaArgs() + ", resolution=" + this.getResolution() + ", gameDir=" + this.getGameDir() + ", javaDir=" + this.getJavaDir() + ", useHopper=" + this.useHopper + ")";
+		return "GameProfile(name=" + this.getName() + ", lastVersionId=" + this.getLastVersionId() + ", allowedReleases=" + this.allowedReleases + ", launcherVisibility=" + this.getLauncherVisibility() + ", javaArgs=" + this.getJavaArgs() + ", resolution=" + this.getResolution() + ", gameDir=" + this.getGameDir() + ", javaDir=" + this.getJavaDir() + ", useHopper=" + this.useHopper + ")";
 	}
 
     public static class Resolution {

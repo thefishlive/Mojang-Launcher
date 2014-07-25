@@ -40,7 +40,10 @@ import com.google.gson.JsonParseException;
  * @version 1.0.0
  */
 public class ProfilesFile {
-	
+
+    static final String CURRENT_VERSION = "1.4.5";
+    static final int CURRENT_FORMAT = 15;
+
 	static Gson GSON = new GsonBuilder()
 							.setPrettyPrinting()
 							.registerTypeAdapter(UUID.class, new UUIDAdapter())
@@ -56,6 +59,47 @@ public class ProfilesFile {
 	private Map<String, AuthProfile> authenticationDatabase = new HashMap<>();
 	private String selectedProfile;
 	private String clientToken;
+    private UUID selectedUser;
+    private LauncherVersionInfo launcherVersion = new LauncherVersionInfo(CURRENT_VERSION, CURRENT_FORMAT);
+
+    private static class LauncherVersionInfo {
+        private String name;
+        private int format;
+
+        public LauncherVersionInfo(String name, int format) {
+            this.name = name;
+            this.format = format;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("VersionInfo{");
+            sb.append("name='").append(name).append('\'');
+            sb.append(", format=").append(format);
+            sb.append('}');
+            return sb.toString();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            LauncherVersionInfo that = (LauncherVersionInfo) o;
+
+            if (format != that.format) return false;
+            if (name != null ? !name.equals(that.name) : that.name != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = name != null ? name.hashCode() : 0;
+            result = 31 * result + format;
+            return result;
+        }
+    }
 	
 	/**
 	 * Add a specified game profile to the profiles file.
@@ -103,7 +147,7 @@ public class ProfilesFile {
 			GSON.toJson(this, writer);
 			writer.flush();
 		} catch (IOException | JsonIOException ex) {
-			new LauncherDataException(ex); // TODO convert to specific exception
+			throw new LauncherDataException(ex); // TODO convert to specific exception
 		}
 	}
 	
@@ -138,8 +182,19 @@ public class ProfilesFile {
 		if (!file.exists()) {
 			throw new FileNotFoundException();
 		}
-		try {
-			return GSON.fromJson(new FileReader(launcherProfiles), ProfilesFile.class);
+
+		try (FileReader reader = new FileReader(file)) {
+            ProfilesFile profiles = GSON.fromJson(reader, ProfilesFile.class);
+
+            if (profiles.launcherVersion.format != CURRENT_FORMAT) {
+                if (profiles.launcherVersion.format > CURRENT_FORMAT) {
+                    throw new LauncherDataException("Library out of date. Expected launcher version " + CURRENT_FORMAT + " but got " + profiles.launcherVersion.format);
+                } else if (profiles.launcherVersion.format < CURRENT_FORMAT) {
+                    throw new LauncherDataException("Launcher file out of date. Expected launcher version " + CURRENT_FORMAT + " but got " + profiles.launcherVersion.format);
+                }
+            }
+
+			return profiles;
 		} catch (IOException | JsonParseException ex) {
 			throw new InvalidProfileFileFormatException(ex);
 		}
@@ -147,7 +202,7 @@ public class ProfilesFile {
 	
 	@java.lang.Override
 	public java.lang.String toString() {
-		return "ProfilesFile(profiles=" + this.getProfiles() + ", authenticationDatabase=" + this.getAuthenticationDatabase() + ", selectedProfile=" + this.getSelectedProfile() + ", clientToken=" + this.getClientToken() + ")";
+		return "ProfilesFile(profiles=" + this.getProfiles() + ", authenticationDatabase=" + this.getAuthenticationDatabase() + ", selectedProfile=" + this.getSelectedProfile() + ", clientToken=" + this.getClientToken() + ", selectedUser=" + this.getSelectedUser() + ", launcherVersion=" + this.launcherVersion + ")";
 	}
 	
 	/**
@@ -187,7 +242,7 @@ public class ProfilesFile {
 	}
 
     /**
-     * Sets the currently selected {@link GameProfile} to be run.
+     * Sets the currently selected {@link GameProfile}.
      *
      * @param profile the new selected {@link GameProfile}
      */
@@ -208,6 +263,24 @@ public class ProfilesFile {
 		return this.clientToken;
 	}
 
+    /**
+     * Gets the currently selected {@link AuthProfile}.
+     *
+     * @return the currently selected {@link AuthProfile}
+     */
+    public AuthProfile getSelectedUser() {
+        return getAuthenticationDatabase().get(selectedUser);
+    }
+
+    /**
+     * Sets the currently selected {@link AuthProfile}.
+     *
+     * @param profile the new selected {@link AuthProfile}
+     */
+    public void setSelectedUser(AuthProfile profile) {
+        this.selectedUser = profile.getUuid();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -219,6 +292,8 @@ public class ProfilesFile {
         if (!clientToken.equals(that.clientToken)) return false;
         if (profiles != null ? !profiles.equals(that.profiles) : that.profiles != null) return false;
         if (selectedProfile != null ? !selectedProfile.equals(that.selectedProfile) : that.selectedProfile != null) return false;
+        if (selectedUser != null ? !selectedUser.equals(that.selectedUser) : that.selectedUser != null) return false;
+        if (launcherVersion != null ? !launcherVersion.equals(that.launcherVersion) : that.launcherVersion != null) return false;
 
         return true;
     }
@@ -229,6 +304,8 @@ public class ProfilesFile {
         result = 31 * result + (authenticationDatabase != null ? authenticationDatabase.hashCode() : 0);
         result = 31 * result + (selectedProfile != null ? selectedProfile.hashCode() : 0);
         result = 31 * result + clientToken.hashCode();
+        result = 31 * result + (selectedUser != null ? selectedUser.hashCode() : 0);
+        result = 31 * result + (launcherVersion != null ? launcherVersion.hashCode() : 0);
         return result;
     }
 }

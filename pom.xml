@@ -61,21 +61,21 @@
 				<configuration>
 					<detectLinks>true</detectLinks>
 					<groups>
+                        <group>
+                            <title>Generic</title>
+                            <packages>io.github.thefishlive.minecraft</packages>
+                        </group>
 						<group>
-							<title>Profiles File</title>
-							<packages>io.github.thefishlive.minecraft.profiles</packages>
+							<title>Profiles</title>
+							<packages>io.github.thefishlive.minecraft.profiles*</packages>
 						</group>
-						<group>
-							<title>Utils</title>
-							<packages>io.github.thefishlive.minecraft.utils</packages>
-						</group>
+                        <group>
+                            <title>Versions</title>
+                            <packages>io.github.thefishlive.minecraft.versions</packages>
+                        </group>
 						<group>
 							<title>Gson Parsing</title>
 							<packages>io.github.thefishlive.minecraft.json</packages>
-						</group>
-						<group>
-							<title>Error Handling</title>
-							<packages>io.github.thefishlive.minecraft.exception</packages>
 						</group>
 					</groups>
 				</configuration>

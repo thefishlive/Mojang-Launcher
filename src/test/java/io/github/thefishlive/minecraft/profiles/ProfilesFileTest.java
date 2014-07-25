@@ -37,7 +37,6 @@ public class ProfilesFileTest {
         profile.setGameDir(new File("C:\\Users\\James\\AppData\\Roaming\\.mcbadgerpack-1.7.2-b"));
         profile.setLastVersionId("McBadgerPack-1.7.2-b");
         profile.setJavaArgs(new JavaArgs().setMaxMemory("1G").addSysProperty("fml.ignoreInvalidMinecraftCertificates", "true").addSysProperty("fml.ignorePatchDiscrepancies", "true"));
-        profile.setPlayerUUID(auth.getUuid());
         profile.setLauncherVisibility(VisibilityRule.KEEP_LAUNCHER);
         expected.addProfile(profile);
 
@@ -47,13 +46,13 @@ public class ProfilesFileTest {
         profile.setJavaArgs(new JavaArgs().setMaxMemory("1G").addSysProperty("fml.ignoreInvalidMinecraftCertificates", "true").addSysProperty("fml.ignorePatchDiscrepancies", "true"));
         profile.addReleaseType(ReleaseType.SNAPSHOT);
         profile.addReleaseType(ReleaseType.RELEASE);
-        profile.setPlayerUUID(auth.getUuid());
         profile.setLauncherVisibility(VisibilityRule.KEEP_LAUNCHER);
         expected.addProfile(profile);
 
         expected.setSelectedProfile(profile);
+        expected.setSelectedUser(auth);
         
-        expectedJson = "{\n  \"profiles\": {\n    \"McBadgerPack-1.7.2-b\": {\n      \"name\": \"McBadgerPack-1.7.2-b\",\n      \"lastVersionId\": \"McBadgerPack-1.7.2-b\",\n      \"allowedReleaseTypes\": [],\n      \"playerUUID\": \"75b7fafe7e2443539e0e63fd26caab03\",\n      \"launcherVisibilityOnGameClose\": \"keep the launcher open\",\n      \"javaArgs\": \"-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\\u003dtrue -Dfml.ignorePatchDiscrepancies\\u003dtrue\",\n      \"gameDir\": \"C:\\\\Users\\\\James\\\\AppData\\\\Roaming\\\\.mcbadgerpack-1.7.2-b\",\n      \"useHopperCrashService\": false\n    },\n    \"Dev\": {\n      \"name\": \"Dev\",\n      \"lastVersionId\": \"14w17a\",\n      \"allowedReleaseTypes\": [\n        \"snapshot\",\n        \"release\"\n      ],\n      \"playerUUID\": \"75b7fafe7e2443539e0e63fd26caab03\",\n      \"launcherVisibilityOnGameClose\": \"keep the launcher open\",\n      \"javaArgs\": \"-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\\u003dtrue -Dfml.ignorePatchDiscrepancies\\u003dtrue\",\n      \"gameDir\": \"C:\\\\Users\\\\James\\\\AppData\\\\Roaming\\\\.mcbadgerpack-1.7.2-b\",\n      \"useHopperCrashService\": false\n    }\n  },\n  \"authenticationDatabase\": {\n    \"75b7fafe-7e24-4353-9e0e-63fd26caab03\": {\n      \"displayName\": \"DisplayName\",\n      \"userProperties\": [\n        {\n          \"name\": \"twitch_access_token\",\n          \"value\": \"1fc2942a11f5f37414de5192d30c5a14\"\n        }\n      ],\n      \"accessToken\": \"abbaaa7cd925256f667b15d9d1c6745d\",\n      \"userid\": \"8ad76b690b964550908ad6ac1710808a\",\n      \"uuid\": \"75b7fafe7e2443539e0e63fd26caab03\",\n      \"username\": \"username@example.com\"\n    }\n  },\n  \"selectedProfile\": \"Dev\",\n  \"clientToken\": \"24bde6dd-cefc-4cff-8c97-44c46e808fc2\"\n}";
+        expectedJson = "{\n  \"profiles\": {\n    \"McBadgerPack-1.7.2-b\": {\n      \"name\": \"McBadgerPack-1.7.2-b\",\n      \"lastVersionId\": \"McBadgerPack-1.7.2-b\",\n      \"allowedReleaseTypes\": [],\n      \"launcherVisibilityOnGameClose\": \"keep the launcher open\",\n      \"javaArgs\": \"-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\\u003dtrue -Dfml.ignorePatchDiscrepancies\\u003dtrue\",\n      \"gameDir\": \"C:\\\\Users\\\\James\\\\AppData\\\\Roaming\\\\.mcbadgerpack-1.7.2-b\",\n      \"useHopperCrashService\": false\n    },\n    \"Dev\": {\n      \"name\": \"Dev\",\n      \"lastVersionId\": \"14w17a\",\n      \"allowedReleaseTypes\": [\n        \"snapshot\",\n        \"release\"\n      ],\n      \"launcherVisibilityOnGameClose\": \"keep the launcher open\",\n      \"javaArgs\": \"-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\\u003dtrue -Dfml.ignorePatchDiscrepancies\\u003dtrue\",\n      \"gameDir\": \"C:\\\\Users\\\\James\\\\AppData\\\\Roaming\\\\.mcbadgerpack-1.7.2-b\",\n      \"useHopperCrashService\": false\n    }\n  },\n  \"authenticationDatabase\": {\n    \"75b7fafe7e2443539e0e63fd26caab03\": {\n      \"displayName\": \"DisplayName\",\n      \"userProperties\": [\n        {\n          \"name\": \"twitch_access_token\",\n          \"value\": \"1fc2942a11f5f37414de5192d30c5a14\"\n        }\n      ],\n      \"accessToken\": \"abbaaa7cd925256f667b15d9d1c6745d\",\n      \"userid\": \"8ad76b690b964550908ad6ac1710808a\",\n      \"uuid\": \"75b7fafe7e2443539e0e63fd26caab03\",\n      \"username\": \"username@example.com\"\n    }\n  },\n  \"selectedProfile\": \"Dev\",\n  \"clientToken\": \"24bde6dd-cefc-4cff-8c97-44c46e808fc2\",\n  \"selectedUser\": \"75b7fafe7e2443539e0e63fd26caab03\",\n  \"launcherVersion\": {\n    \"name\": \"1.4.5\",\n    \"format\": 15\n  }\n}";
     }
 
     @Test

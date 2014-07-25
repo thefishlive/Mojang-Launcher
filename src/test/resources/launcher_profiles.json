@@ -6,7 +6,6 @@
       "lastVersionId": "McBadgerPack-1.7.2-b",
       "javaArgs": "-Xmx1G -Dfml.ignoreInvalidMinecraftCertificates\u003dtrue -Dfml.ignorePatchDiscrepancies\u003dtrue",
       "allowedReleaseTypes": [],
-      "playerUUID": "75b7fafe7e2443539e0e63fd26caab03",
       "launcherVisibilityOnGameClose": "keep the launcher open"
     },
     "Dev": {
@@ -18,7 +17,6 @@
         "snapshot",
         "release"
       ],
-      "playerUUID": "75b7fafe7e2443539e0e63fd26caab03",
       "launcherVisibilityOnGameClose": "keep the launcher open"
     }
   },
@@ -38,5 +36,10 @@
       "uuid": "75b7fafe-7e24-4353-9e0e-63fd26caab03",
       "username": "username@example.com"
     }
+  },
+  "selectedUser": "75b7fafe7e2443539e0e63fd26caab03",
+  "launcherVersion": {
+     "name": "1.4.5",
+     "format": 15
   }
 }
